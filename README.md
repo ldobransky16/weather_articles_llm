@@ -1,54 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Weather Article Generator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-        }
-        code {
-            background-color: #f4f4f4;
-            padding: 2px 4px;
-            font-family: Consolas, monospace;
-        }
-        pre {
-            background-color: #f4f4f4;
-            padding: 10px;
-            overflow-x: auto;
-        }
-        h1, h2, h3, h4 {
-            color: #333;
-        }
-        ul {
-            list-style-type: disc;
-            margin-left: 40px;
-        }
-        table {
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        table, th, td {
-            border: 1px solid #333;
-        }
-        th, td {
-            padding: 8px 12px;
-            text-align: left;
-        }
-        a {
-            color: #0066cc;
-        }
-        .code-block {
-            background-color: #f4f4f4;
-            padding: 10px;
-            font-family: Consolas, monospace;
-            overflow-x: auto;
-        }
-    </style>
-</head>
-<body>
+
 
 <h1>Weather Article Generator</h1>
 
