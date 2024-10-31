@@ -125,10 +125,10 @@ API_KEY=your_api_key  # Optional, if using API key authentication
 <p><strong>Step 5:</strong> Run the application.</p>
 <pre class="code-block"><code>flask run
 </code></pre>
-<p>By default, the application will run on <a href="http://localhost:5000">http://localhost:5000</a>.</p>
+<p>By default, the application will run on <a href="http://localhost:5001">http://localhost:5001</a>.</p>
 
 <p><strong>Step 6:</strong> Access the API documentation.</p>
-<p>Open your browser and navigate to <a href="http://localhost:5000/docs">http://localhost:5000/docs</a> to view the Swagger UI documentation.</p>
+<p>Open your browser and navigate to <a href="http://localhost:5001/docs">http://localhost:5001/docs</a> to view the Swagger UI documentation.</p>
 
 <h2>API Documentation</h2>
 
@@ -230,13 +230,13 @@ API_KEY=your_api_key  # Optional, if using API key authentication
 
 <p>To test the API endpoints, you can use:</p>
 <ul>
-    <li><strong>Swagger UI</strong>: Available at <a href="http://localhost:5000/docs">http://localhost:5000/docs</a> (or <a href="http://localhost:5001/docs">http://localhost:5001/docs</a> if using Docker).</li>
+    <li><strong>Swagger UI</strong>: Available at <a href="http://localhost:5001/docs">http://localhost:5001/docs</a> (or <a href="http://localhost:5001/docs">http://localhost:5001/docs</a> if using Docker).</li>
     <li><strong>cURL</strong>: Use command-line requests to test endpoints.</li>
     <li><strong>Postman</strong>: Create requests to test API functionality.</li>
 </ul>
 
 <p><strong>Example cURL Request:</strong></p>
-<pre class="code-block"><code>curl -X GET "http://localhost:5000/weather_article/?latitude=48.7445283&longitude=21.701820&date=2023-10-25&language=en"
+<pre class="code-block"><code>curl -X GET "http://localhost:5001/weather_article/?latitude=48.7445283&longitude=21.701820&date=2023-10-25&language=en"
 </code></pre>
 
 <h2>Deployment</h2>
