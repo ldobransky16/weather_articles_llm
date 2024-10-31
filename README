@@ -1,0 +1,195 @@
+Weather Article Generator
+
+A Flask-based RESTful API that retrieves weather data based on geographic coordinates and generates weather articles using OpenAI’s GPT models. The application integrates with the OpenWeatherMap API to fetch current weather data and uses OpenAI’s API to generate articles in different modes (e.g., “catastrophic”, “sensational”) based on the weather conditions.
+
+Features
+
+	•	Retrieves current weather data based on latitude and longitude.
+	•	Generates weather articles in different modes using OpenAI’s GPT models.
+	•	Supports different languages (English and Slovak).
+	•	Provides a RESTful API with proper documentation using Flask-RESTX.
+	•	Includes a CI/CD pipeline for automated deployment to cloud platforms.
+
+Prerequisites
+
+	•	Python 3.8+
+	•	Docker and Docker Compose (if running with Docker)
+	•	OpenAI API Key: Sign up at OpenAI to get an API key.
+	•	OpenWeatherMap API Key: Sign up at OpenWeatherMap to get an API key.
+	•	Git: For cloning the repository.
+
+Installation
+
+Clone the Repository
+git clone https://github.com/lukas.dobransky/weather-article-generator.git
+cd weather-article-generator
+
+Environment Variables
+
+Create a .env file in the root directory and add the following environment variables:
+OPENAI_API_KEY=your_openai_api_key
+WEATHER_API_KEY=your_openweathermap_api_key
+SECRET_KEY=your_secret_key
+API_KEY=your_api_key  # Optional, if using API key authentication
+
+Replace your_openai_api_key and your_openweathermap_api_key with your actual API keys.
+
+Running the Application
+Using Docker Compose
+Step 1: Build and run the Docker containers.
+docker-compose up --build
+This command will build the Docker images and start the application and database containers.
+
+Step 2: Access the API documentation.
+
+Open your browser and navigate to http://localhost:5001/docs to view the Swagger UI documentation.
+
+Running Locally without Docker
+
+Step 1: Create a virtual environment.
+python -m venv venv
+
+Step 2: Activate the virtual environment.
+	•	On Linux/Mac:
+        source venv/bin/activate
+    •	On Windows:
+        venv\Scripts\activate
+
+Step 3: Install dependencies.
+pip install -r requirements.txt
+Step 4: Set environment variables.
+You can set environment variables in your shell or create a .env file.
+flask run
+By default, the application will run on http://localhost:5000.
+
+Step 6: Access the API documentation.
+
+Open your browser and navigate to http://localhost:5000/docs to view the Swagger UI documentation.
+
+API Documentation
+
+Endpoints
+
+GET /weather_article/
+
+Generates a weather article based on location and date.
+
+URL: /weather_article/
+
+Method: GET
+
+Request Parameters
+Parameter	Type	Required	Description
+latitude	float	Yes	    Latitude of the location (between -90 and 90).
+longitude	float	Yes 	Longitude of the location (between -180 and 180).
+date	    string	Yes	    Date in YYYY-MM-DD format.
+language	string	No	    Language code (en or sk). Default is en.
+
+Example Request:
+http://localhost:5001/weather_article?latitude=48.7445283&longitude=21.701820&language=sk&date=2024-10-31
+
+Successful Response (200 OK):
+{
+  "location": {
+    "name": "Sample City",
+    "country": "US",
+    "coordinates": {
+      "latitude": 48.7445283,
+      "longitude": 21.70182
+    }
+  },
+  "weather": {
+    "description": "clear sky",
+    "temperature": 20.5,
+    "humidity": 55,
+    "wind_speed": 3.2
+  },
+  "article": {
+    "catastrophic": {
+      "headline": "Disaster Strikes Sample City!",
+      "lead": "An unprecedented event has shocked Sample City.",
+      "body": "In an unexpected turn of events, the city has faced an unusual weather phenomenon..."
+    },
+    "sensational": {
+      "headline": "Exciting Times in Sample City!",
+      "lead": "Residents of Sample City experience thrilling weather.",
+      "body": "The weather in Sample City has taken a sensational twist, bringing excitement to all..."
+    }
+  }
+}
+
+Error Response (400 Bad Request):
+{
+  "error": "Validation Error",
+  "details": {
+    "latitude": ["Missing data for required field."]
+  }
+}
+
+Notes:
+
+	•	If the provided date is not today’s date, the application returns mock data with random values.
+	•	The articles are generated in the specified language and mode.
+	•	Modes include “catastrophic” and “sensational”.
+
+Testing
+
+To test the API endpoints, you can use:
+
+	•	Swagger UI: Available at http://localhost:5000/docs (or http://localhost:5001/docs if using Docker).
+	•	cURL: Use command-line requests to test endpoints.
+	•	Postman: Create requests to test API functionality.
+
+Example cURL Request:
+curl -X GET "http://localhost:5000/weather_article/?latitude=48.7445283&longitude=21.701820&date=2023-10-25&language=en"
+
+Deployment
+
+CI/CD Pipeline
+
+The application includes a CI/CD pipeline using GitHub Actions to automate deployment to cloud platforms.
+
+GitHub Actions (AWS Elastic Beanstalk)
+
+A GitHub Actions workflow (.github/workflows/deploy.yml) is set up to:
+
+	•	Build and push Docker images to Docker Hub.
+	•	Deploy the application to AWS Elastic Beanstalk.
+
+
+To set up:
+
+	1.	AWS Configuration:
+        •	Create an AWS Elastic Beanstalk application and environment.
+        •	Configure environment variables in Elastic Beanstalk (e.g., OPENAI_API_KEY, WEATHER_API_KEY).
+	2.	GitHub Secrets:
+        •	Add AWS credentials and Docker Hub credentials to your repository’s secrets:
+        •	AWS_ACCESS_KEY_ID
+        •	AWS_SECRET_ACCESS_KEY
+        •	AWS_ACCOUNT_ID
+        •	DOCKERHUB_USERNAME
+        •	DOCKERHUB_TOKEN
+	3.	Update Workflow File:
+	    •	Replace placeholders in deploy.yml with actual values (e.g., your-dockerhub-username, your-eb-application-name).
+
+Cloud Build (GCP Cloud Run)
+
+Alternatively, you can deploy the application to GCP Cloud Run using Cloud Build.
+
+To set up:
+
+	1.	Create cloudbuild.yaml:
+	    •	Define build steps for building, pushing, and deploying the Docker image.
+	2.	GCP Configuration:
+	    •	Enable necessary APIs in GCP (Cloud Build, Cloud Run).
+	    •	Set up a Cloud Build trigger linked to your GitHub repository.
+	    •	Use Secret Manager to securely manage API keys.
+	3.	Permissions:
+	    •	Ensure Cloud Build service account has permissions to deploy to Cloud Run and access secrets.
+
+Acknowledgments
+
+	•	OpenAI: For providing the GPT models used in article generation.
+	•	OpenWeatherMap: For providing the weather data API.
+	•	Flask: For the web framework used to build the application.
+	•	Flask-RESTX: For building RESTful APIs with Flask.
