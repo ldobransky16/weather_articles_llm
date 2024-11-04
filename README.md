@@ -36,6 +36,12 @@ cd weather-article-generator
 WEATHER_API_KEY=your_openweathermap_api_key
 SECRET_KEY=your_secret_key
 API_KEY=your_api_key  # Optional, if using API key authentication
+
+# Database configuration
+POSTGRES_USER=postgres-user
+POSTGRES_PASSWORD=postgres-password
+POSTGRES_DB=postgres-db-name
+SQLALCHEMY_DATABASE_URI=postgresql://postgres:postgres@db:5432/weatherdb
 </code></pre>
 <p>Replace <code>your_openai_api_key</code> and <code>your_openweathermap_api_key</code> with your actual API keys.</p>
 
