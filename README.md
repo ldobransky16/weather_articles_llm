@@ -37,7 +37,7 @@ WEATHER_API_KEY=your_openweathermap_api_key
 SECRET_KEY=your_secret_key
 API_KEY=your_api_key  # Optional, if using API key authentication
 
-# Database configuration
+#Database config
 POSTGRES_USER=postgres-user
 POSTGRES_PASSWORD=postgres-password
 POSTGRES_DB=postgres-db-name
